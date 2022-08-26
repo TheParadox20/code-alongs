@@ -1,0 +1,105 @@
+:root{
+    /* hsl(hue, saturation, lightness) */
+    --clr-neutral-900: hsl(207,19%, 9%);
+    --clr-neutral-100: hsl(0, 0%, 100%);
+    --clr-neutral-400: hsl(142, 90%, 61%);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    line-height: 1.6;
+    background: var(--clr-neutral-900);
+    font-family: sans-serif;
+}
+
+.card{
+    color: var(--clr-neutral-100);
+    background-image: url(/zeltatech.png);
+    background-size: cover;
+    padding: 10rem 0 0;
+    max-width: 35ch; /* characters wide */
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+    transition: transform 250ms ease-in-out;
+}
+
+.card:hover{
+    transform: scale(1.05);
+}
+
+/* HSL to play with opacity
+ * lightness 0 -> black while 100 -> pure white
+ * hsl(h, s, l / opacity)
+ *
+ */
+.card-content{
+    --padding: 2rem;
+    padding: var(--padding);
+    background: linear-gradient(
+        hsl(0 0% 0% / 0),
+        hsl(20 0% 0% / 0.3) 5%,
+        hsl(0 0% 0% / 1)
+    );
+    transform: translateY(70%);
+    transition: transform 1000ms ease;
+    transition-delay: 500ms;
+}
+
+.card-content > *:not(.card-title){
+    opacity: 0;
+    transition: opacity 500ms linear;
+}
+
+.card:hover .card-content{
+    transform: translateY(0%);
+}
+.card:hover .card-content > *{
+    opacity: 1;
+}
+
+.card-title{
+    position: relative; /*makes it the containing block for position absolute*/
+    width: max-content; /*width of itself*/
+    /* outline: 1px solid red; */ /*helpful for debugging*/
+}
+.card-title::after{/*pseudo element requires content property*/
+    content: "";
+    position: absolute;
+    left: calc(var(--padding)*-1);
+    bottom: 0;
+    height: 4px;
+    width: calc(100% + var(--padding));
+    background: var(--clr-neutral-400);
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform 500ms ease;
+}
+
+.card:hover .card-title::after{
+    transform: scaleX(1);
+}
+
+.button{
+    cursor: pointer;
+    display: inline;
+    text-decoration: none;
+    color: var(--clr-neutral-900);
+    background-color: var(--clr-neutral-400);
+    padding: 0.5em 1.25em;
+    border-radius: 0.25rem;
+}
+
+.button:hover,
+.button:focus{
+    background-color: var(--clr-neutral-100);
+}
