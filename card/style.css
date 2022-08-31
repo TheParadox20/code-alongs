@@ -103,3 +103,9 @@ body{
 .button:focus{
     background-color: var(--clr-neutral-100);
 }
+.compare{
+    display: flex;
+}
+.compare div{
+    margin: 1%;
+}
